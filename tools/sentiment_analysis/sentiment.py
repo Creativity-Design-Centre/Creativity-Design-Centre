@@ -172,7 +172,7 @@ def output_train(X, vectorizer, true_k=10, minibatch=False, showLable=False):
         #     cluster_3.append(new_list[j])
 
     vec = CountVectorizer(stop_words='english')
-    X1 = vec.fit_transform(cluster_1)
+    X1 = vec.fit_transform(cluster_1).toarray()
     vocab = np.array(vec.get_feature_names())
     biterms = vec_to_biterms(X1)
     btm = oBTM(num_topics=10, V=vocab)
