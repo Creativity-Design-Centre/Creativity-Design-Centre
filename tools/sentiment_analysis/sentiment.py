@@ -88,8 +88,10 @@ class oBTM:
                 P_zbi = self.theta_z * \
                     self.phi_wz[b[0], :] * self.phi_wz[b[1], :]
                 P_zb[j] = P_zbi / P_zbi.sum()
-            P_zd[i] = P_zb.sum(axis=0) / P_zb.sum(axis=0).sum()
-
+            if P_zb.sum(axis=0).sum() != 0:
+                P_zd[i] = P_zb.sum(axis=0) / P_zb.sum(axis=0).sum()
+            else:
+                P_zd[i] = P_zb.sum(axis=0)
         return P_zd
 
 
@@ -117,7 +119,7 @@ def topic_summuary(P_wz, X, V, M, verbose=True):
                 D_vmvl = np.in1d(np.nonzero(X[:, V_z[l]]), np.nonzero(
                     X[:, V_z[m]])).sum(dtype=int) + 1
                 D_vl = np.count_nonzero(X[:, V_z[l]])
-                if D_vl is not 0:
+                if D_vl != 0:
                     C_z += math.log(D_vmvl / D_vl)
 
         res['coherence'][z] = C_z
@@ -168,8 +170,6 @@ def output_train(X, vectorizer, true_k=10, minibatch=False, showLable=False):
         #     cluster_2.append(new_list[j])
         # elif result[j] == 2:
         #     cluster_3.append(new_list[j])
-    for k in cluster_1:
-        cluster1_semantic = cluster1_semantic + TextBlob(k).sentiment[0]
 
     vec = CountVectorizer(stop_words='english')
     X1 = vec.fit_transform(cluster_1)
@@ -177,8 +177,8 @@ def output_train(X, vectorizer, true_k=10, minibatch=False, showLable=False):
     biterms = vec_to_biterms(X1)
     btm = oBTM(num_topics=10, V=vocab)
     print("\n\n Train Online BTM ..")
-    for i in range(0, len(biterms), 100):  # prozess chunk of 200 texts
-        print('==>', i, len(biterms))
+    for i in range(0, 400, 100):  # prozess chunk of 200 texts
+        print('==>', i, 400)
         biterms_chunk = biterms[i:i + 100]
         btm.fit(biterms_chunk, iterations=50)
     topics = btm.transform(biterms)
