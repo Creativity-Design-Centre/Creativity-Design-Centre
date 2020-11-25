@@ -53,7 +53,10 @@ class oBTM:
                 P_z = (n_z + self.alpha) * P_w0z * P_w1z
                 # P_z = (n_z + self.alpha) * ((n_wz[b_i[0], :] + self.beta[b_i[0], :]) * (n_wz[b_i[1], :] + self.beta[b_i[1], :]) /
                 #                            (((n_wz + self.beta).sum(axis=0) + 1) * (n_wz + self.beta).sum(axis=0)))  # todo check out
-                P_z = P_z / P_z.sum()
+                if P_z.sum() != 0:
+                    P_z = P_z / P_z.sum()
+                else:
+                    P_z = P_z
                 Z[i] = np.random.choice(self.K, 1, p=P_z)
                 n_wz[b_i[0], Z[i]] += 1
                 n_wz[b_i[1], Z[i]] += 1
@@ -174,12 +177,12 @@ def output_train(X, vectorizer, true_k=10, minibatch=False, showLable=False):
     biterms = vec_to_biterms(X1)
     btm = oBTM(num_topics=10, V=vocab)
     print("\n\n Train Online BTM ..")
-    # for i in range(0, len(biterms), 100):  # prozess chunk of 200 texts
-    #     print('==>', i)
-    #     biterms_chunk = biterms[i:i + 100]
-    #     btm.fit(biterms_chunk, iterations=50)
-    # topics = btm.transform(biterms)
-    topics = btm.fit_transform(biterms, iterations=100)
+    for i in range(0, len(biterms), 100):  # prozess chunk of 200 texts
+        print('==>', i, len(biterms))
+        biterms_chunk = biterms[i:i + 100]
+        btm.fit(biterms_chunk, iterations=50)
+    topics = btm.transform(biterms)
+    # topics = btm.fit_transform(biterms, iterations=100)
     print("\n\n Visualize Topics ..")
     vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
         X, axis=1), vocab, np.sum(X, axis=0))
