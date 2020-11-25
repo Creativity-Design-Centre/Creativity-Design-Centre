@@ -174,11 +174,12 @@ def output_train(X, vectorizer, true_k=10, minibatch=False, showLable=False):
     biterms = vec_to_biterms(X1)
     btm = oBTM(num_topics=10, V=vocab)
     print("\n\n Train Online BTM ..")
-    for i in range(0, len(biterms), 100):  # prozess chunk of 200 texts
-        print('==>', i)
-        biterms_chunk = biterms[i:i + 100]
-        btm.fit(biterms_chunk, iterations=50)
-    topics = btm.transform(biterms)
+    # for i in range(0, len(biterms), 100):  # prozess chunk of 200 texts
+    #     print('==>', i)
+    #     biterms_chunk = biterms[i:i + 100]
+    #     btm.fit(biterms_chunk, iterations=50)
+    # topics = btm.transform(biterms)
+    topics = btm.fit_transform(biterms, iterations=100)
     print("\n\n Visualize Topics ..")
     vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
         X, axis=1), vocab, np.sum(X, axis=0))
