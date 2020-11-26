@@ -221,7 +221,7 @@ def open_file():
     # get biterms
     biterms = vec_to_biterms(X)
     # create btm
-    btm = oBTM(num_topics=20, V=vocab)
+    btm = oBTM(num_topics=10, V=vocab)
     print("\n\n Train Online BTM ..")
     for i in range(0, len(biterms), 100):  # prozess chunk of 200 texts
         print(i, len(biterms))
