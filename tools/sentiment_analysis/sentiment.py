@@ -185,10 +185,6 @@ def output_train(X, vectorizer, true_k=10, minibatch=False, showLable=False):
     # topics = btm.fit_transform(biterms, iterations=100)
     print("\n\n Visualize Topics ..")
 
-    vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
-        X1, axis=1), vocab, np.sum(X1, axis=0))
-    pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
-
     print("\n\n Topic coherence ..")
     topic_summuary(btm.phi_wz.T, X1, vocab, 10)
     print("\n\n Texts & Topics ..")
@@ -196,12 +192,18 @@ def output_train(X, vectorizer, true_k=10, minibatch=False, showLable=False):
         print("{} (topic: {})".format(cluster_1[i], topics[i].argmax()))
     topics_file = open('./topic.text', 'a')
     topics_file.writelines(topics)
+
+    vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
+        X1, axis=1), vocab, np.sum(X1, axis=0))
+    pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
+
     return -km.score(X)
 
 
 def open_file():
-    file_list = ['../product-reviewB07H625JJL-one_star.txt', '../product-reviewB07H625JJL-two_star.txt',
-                 '../product-reviewB07H625JJL-three_star.txt', '../product-reviewB07H625JJL-four_star.txt', '../product-reviewB07H625JJL-five_star.txt']
+    # file_list = ['../product-reviewB07H625JJL-one_star.txt', '../product-reviewB07H625JJL-two_star.txt',
+    #              '../product-reviewB07H625JJL-three_star.txt', '../product-reviewB07H625JJL-four_star.txt', '../product-reviewB07H625JJL-five_star.txt']
+    file_list = ['../product-reviewB07H625JJL-one_star.txt']
     for i in file_list:
         with open(i,  'r') as f:
             content = f.readlines()
@@ -211,9 +213,37 @@ def open_file():
                 if i != '\n':
                     all_comment += 1
                     new_list.append(i)
-    # print(len(new_list))
-    X, vectorizer = transform(new_list, n_features=500)
-    output_train(X, vectorizer, true_k=3)
+
+    vec = CountVectorizer(stop_words='english')
+    X = vec.fit_transform(new_list).toarray()
+    # get vocabulary
+    vocab = np.array(vec.get_feature_names())
+    # get biterms
+    biterms = vec_to_biterms(X)
+    # create btm
+    btm = oBTM(num_topics=20, V=vocab)
+    print("\n\n Train Online BTM ..")
+    for i in range(0, len(biterms), 100):  # prozess chunk of 200 texts
+        biterms_chunk = biterms[i:i + 100]
+        btm.fit(biterms_chunk, iterations=50)
+    topics = btm.transform(biterms)
+    print("\n\n Topic coherence ..")
+    topic_summuary(btm.phi_wz.T, X, vocab, 10)
+
+    print("\n\n Texts & Topics ..")
+    for i in range(len(new_list)):
+        print("{} (topic: {})".format(new_list[i], topics[i].argmax()))
+    topics_file = open('./topic.text', 'a')
+    topics_file.writelines(topics)
+
+    print("\n\n Visualize Topics ..")
+    vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
+        X, axis=1), vocab, np.sum(X, axis=0))
+    pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
+
+# print(len(new_list))
+# X, vectorizer = transform(new_list, n_features=500)
+# output_train(X, vectorizer, true_k=3)
 
 
 open_file()
