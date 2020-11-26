@@ -224,6 +224,7 @@ def open_file():
     btm = oBTM(num_topics=20, V=vocab)
     print("\n\n Train Online BTM ..")
     for i in range(0, len(biterms), 100):  # prozess chunk of 200 texts
+        print(i, len(biterms))
         biterms_chunk = biterms[i:i + 100]
         btm.fit(biterms_chunk, iterations=50)
     topics = btm.transform(biterms)
