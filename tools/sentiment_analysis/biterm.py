@@ -3,6 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 from itertools import combinations, chain
 import pyLDAvis
+import math
 
 
 class oBTM:
