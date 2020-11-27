@@ -2,6 +2,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 from itertools import combinations, chain
+import pyLDAvis
 
 
 class oBTM:
@@ -136,6 +137,7 @@ with open('../product-reviewB07H625JJL-one_star.txt',  'r') as f:
         if i != '\n':
             all_comment += 1
             new_list.append(i)
+new_list = new_list[0:200]
 
 vec = CountVectorizer(stop_words='english')
 X = vec.fit_transform(new_list).toarray()
@@ -144,6 +146,20 @@ vocab = np.array(vec.get_feature_names())
 biterms = vec_to_biterms(X)
 
 btm = oBTM(num_topics=10, V=vocab)
-topics = btm.fit_transform(biterms, iterations=100)
-
-print(topics)
+print("\n\n Train Online BTM ..")
+for i in range(0, len(biterms), 100):
+    print(i, len(biterms))
+    biterms_chunk = biterms[i:i + 100]
+    btm.fit(biterms_chunk, iterations=50)
+topics = btm.transform(biterms)
+print("\n\n Topic coherence ..")
+topic_summuary(btm.phi_wz.T, X, vocab, 10)
+topList = []
+print("\n\n Texts & Topics ..")
+for i in range(len(new_list)):
+    print("{} (topic: {})".format(new_list[i], topics[i].argmax()))
+    print(topics[i])
+print("\n\n Visualize Topics ..")
+vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
+    X, axis=1), vocab, np.sum(X, axis=0))
+pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
