@@ -138,7 +138,7 @@ with open('../product-reviewB07H625JJL-one_star.txt',  'r') as f:
         if i != '\n':
             all_comment += 1
             new_list.append(i)
-new_list = new_list[0:200]
+new_list = new_list
 
 vec = CountVectorizer(stop_words='english')
 X = vec.fit_transform(new_list).toarray()
