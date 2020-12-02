@@ -140,27 +140,53 @@ with open('../product-reviewB07H625JJL-one_star.txt',  'r') as f:
             if(len(i) > 10):
                 new_list.append(i)
 new_list = new_list
-vec = CountVectorizer(stop_words='english')
-X = vec.fit_transform(new_list).toarray()
 
-vocab = np.array(vec.get_feature_names())
-biterms = vec_to_biterms(X)
 
-btm = oBTM(num_topics=10, V=vocab)
-print("\n\n Train Online BTM ..")
-for i in range(0, len(biterms), 100):
-    print(i, len(biterms))
-    biterms_chunk = biterms[i:i + 100]
-    btm.fit(biterms_chunk, iterations=50)
-topics = btm.transform(biterms)
-print("\n\n Topic coherence ..")
-topic_summuary(btm.phi_wz.T, X, vocab, 10)
-topList = []
-print("\n\n Texts & Topics ..")
-for i in range(len(new_list)):
-    print("{} (topic: {})".format(new_list[i], topics[i].argmax()))
-    print(topics[i])
-print("\n\n Visualize Topics ..")
-vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
-    X, axis=1), vocab, np.sum(X, axis=0))
-pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
+def do_it(new_list, k):
+    print(k)
+    vec = CountVectorizer(stop_words='english')
+    X = vec.fit_transform(new_list).toarray()
+
+    vocab = np.array(vec.get_feature_names())
+    biterms = vec_to_biterms(X)
+
+    btm = oBTM(num_topics=10, V=vocab)
+    print("\n\n Train Online BTM ..")
+    for i in range(0, len(biterms), 100):
+        print(i, len(biterms))
+        biterms_chunk = biterms[i:i + 100]
+        btm.fit(biterms_chunk, iterations=50)
+    topics = btm.transform(biterms)
+    print("\n\n Topic coherence ..")
+    topic_summuary(btm.phi_wz.T, X, vocab, 10)
+    topList = []
+    # print("\n\n Texts & Topics ..")
+    # for i in range(len(new_list)):
+    #     print("{} (topic: {})".format(new_list[i], topics[i].argmax()))
+    #     print(topics[i])
+    print("\n\n Visualize Topics ..")
+    vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
+        X, axis=1), vocab, np.sum(X, axis=0))
+    pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
+
+
+do_it(new_list[0:100], 1)
+do_it(new_list[100:200], 2)
+do_it(new_list[200:300], 3)
+do_it(new_list[300:400], 4)
+do_it(new_list[400:500], 5)
+do_it(new_list[500:600], 6)
+do_it(new_list[600:700], 7)
+do_it(new_list[700:800], 8)
+do_it(new_list[800:900], 9)
+do_it(new_list[900:1000], 10)
+do_it(new_list[1000:1100], 11)
+do_it(new_list[1100:1200], 12)
+do_it(new_list[1200:1300], 13)
+do_it(new_list[1300:1400], 14)
+do_it(new_list[1400:1500], 15)
+do_it(new_list[1500:1600], 16)
+do_it(new_list[1600:1700], 17)
+do_it(new_list[1700:1800], 18)
+do_it(new_list[1800:1900], 19)
+do_it(new_list[1900:2000], 20)
