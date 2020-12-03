@@ -3,6 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 from itertools import combinations, chain
 import pyLDAvis
+from pyLDAvis import gensim
 import math
 
 
@@ -165,8 +166,7 @@ def do_it(new_list, k):
     #     print("{} (topic: {})".format(new_list[i], topics[i].argmax()))
     #     print(topics[i])
     print("\n\n Visualize Topics ..")
-    vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
-        X, axis=1), vocab, np.sum(X, axis=0))
+    vis = gensim.prepare(btm.phi_wz.T, topics, vocab)
     pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
 
 
