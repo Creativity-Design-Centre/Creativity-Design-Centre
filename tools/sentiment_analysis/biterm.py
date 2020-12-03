@@ -150,7 +150,8 @@ def do_it(new_list, k):
     vocab = np.array(vec.get_feature_names())
     biterms = vec_to_biterms(X)
 
-    btm = oBTM(num_topics=20, V=vocab)
+    btm = oBTM(num_topics=10, V=vocab)
+    print("\n\n Train Online BTM ..")
     for i in range(0, len(biterms), 100):
         print(i, len(biterms))
         biterms_chunk = biterms[i:i + 100]
@@ -169,6 +170,21 @@ def do_it(new_list, k):
     pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
 
 
+# do_it(new_list[0:100], 1)
+# do_it(new_list[100:200], 2)
+# do_it(new_list[200:300], 3)
+# do_it(new_list[300:400], 4)
+# do_it(new_list[400:500], 5)
+# do_it(new_list[500:600], 6)
+do_it(new_list[600:700], 7)
+do_it(new_list[700:800], 8)
+do_it(new_list[800:900], 9)
+do_it(new_list[900:1000], 10)
+do_it(new_list[1000:1100], 11)
+do_it(new_list[1100:1200], 12)
+do_it(new_list[1200:1300], 13)
+do_it(new_list[1300:1400], 14)
+do_it(new_list[1400:1500], 15)
 do_it(new_list[1500:1600], 16)
 do_it(new_list[1600:1700], 17)
 do_it(new_list[1700:1800], 18)
