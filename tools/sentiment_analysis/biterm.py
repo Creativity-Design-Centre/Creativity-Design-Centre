@@ -152,11 +152,8 @@ def do_it(new_list, k):
 
     btm = oBTM(num_topics=10, V=vocab)
     print("\n\n Train Online BTM ..")
-    for i in range(0, len(biterms), 100):
-        print(i, len(biterms))
-        biterms_chunk = biterms[i:i + 100]
-        btm.fit(biterms_chunk, iterations=50)
-    topics = btm.transform(biterms)
+
+    topics = btm.fit_transform(biterms, iterations=100)
     print("\n\n Topic coherence ..")
     topic_summuary(btm.phi_wz.T, X, vocab, 10)
     topList = []
