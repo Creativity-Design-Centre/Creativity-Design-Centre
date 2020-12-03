@@ -170,13 +170,6 @@ def do_it(new_list, k):
     pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
 
 
-do_it(new_list[0:100], 1)
-do_it(new_list[100:200], 2)
-do_it(new_list[200:300], 3)
-do_it(new_list[300:400], 4)
-do_it(new_list[400:500], 5)
-do_it(new_list[500:600], 6)
-do_it(new_list[600:700], 7)
 do_it(new_list[700:800], 8)
 do_it(new_list[800:900], 9)
 do_it(new_list[900:1000], 10)
