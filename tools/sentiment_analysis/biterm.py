@@ -144,7 +144,7 @@ new_list = new_list
 
 def do_it(new_list, k):
     print(k)
-    vec = CountVectorizer(stop_words='english')
+    vec = CountVectorizer()
     X = vec.fit_transform(new_list).toarray()
 
     vocab = np.array(vec.get_feature_names())
@@ -152,7 +152,6 @@ def do_it(new_list, k):
 
     btm = oBTM(num_topics=10, V=vocab)
     print("\n\n Train Online BTM ..")
-
     topics = btm.fit_transform(biterms, iterations=100)
     print("\n\n Topic coherence ..")
     topic_summuary(btm.phi_wz.T, X, vocab, 10)
