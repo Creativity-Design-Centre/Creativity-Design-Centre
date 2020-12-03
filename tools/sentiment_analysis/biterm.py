@@ -165,7 +165,7 @@ def do_it(new_list, k):
     #     print("{} (topic: {})".format(new_list[i], topics[i].argmax()))
     #     print(topics[i])
     print("\n\n Visualize Topics ..")
-    vis = pyLDAvis.gensim.prepare(btm.phi_wz.T, topics, np.count_nonzero(
+    vis = pyLDAvis.prepare(btm.phi_wz.T, topics, np.count_nonzero(
         X, axis=1), vocab, np.sum(X, axis=0))
     pyLDAvis.save_html(vis, './vis/online_btm.html')  # path to output
 
