@@ -186,4 +186,4 @@ def do_it(new_list, k):
 # do_it(new_list[1700:1800], 18)
 # do_it(new_list[1800:1900], 19)
 # do_it(new_list[1900:2000], 20)
-do_it(new_list, 'all')
+do_it(new_list[0:700], 'all')
