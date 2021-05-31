@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://www.liverpool.ac.uk">
-    <img src="https://www.liverpool.ac.uk/logo-size-test/full-colour.svg" alt="Logo" width="160" height="90">
+    <img src="https://www.liverpool.ac.uk/logo-size-test/full-colour.svg" alt="Logo" width="320" height="180">
   </a>
 
   <h3 align="center">Department of Civil Engineering and Industrial Design</h3>
