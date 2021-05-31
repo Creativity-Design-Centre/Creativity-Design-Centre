@@ -73,10 +73,10 @@ export default {
     return {
       hasResult: false,
       searchResult: [],
-      confirmResult: [],
-      showImage: [],
+      confirmResult: ['https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1922912628,3118313769&fm=26&gp=0.jpg', 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2374596061,3372688405&fm=26&gp=0.jpg'],
+      showImage: ['https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1922912628,3118313769&fm=26&gp=0.jpg', 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2374596061,3372688405&fm=26&gp=0.jpg'],
       searchStatus: false,
-      dialogVisable: false
+      dialogVisable: true
     }
   },
   components: {
