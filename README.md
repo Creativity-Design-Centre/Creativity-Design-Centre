@@ -1,30 +1,18 @@
-[![Stargazers](https://snyk.io/test/github/dwyl/hapi-auth-jwt2/badge.svg?targetFile=package.json&style=flat-square)](https://github.com/Creativity-Design-Centre/Creativity-Design-Centre/stargazers)
-[![Known Vulnerabilities](https://snyk.io/test/github/dwyl/hapi-auth-jwt2/badge.svg?targetFile=package.json&style=flat-square)](https://github.com/Creativity-Design-Centre/Creativity-Design-Centre/stargazers)
-
-[![Stargazers][stars-shield]][stars-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://www.liverpool.ac.uk">
-    <img src="https://www.liverpool.ac.uk/logo-size-test/full-colour.svg" alt="Logo" width="80" height="80">
+    <img src="https://www.liverpool.ac.uk/logo-size-test/full-colour.svg" alt="Logo" width="160" height="90">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Department of Civil Engineering and Industrial Design</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Civil Engineering is the application of scientific principles and theories to the design and construction of the infrastructure that makes modern society possible. This includes buildings, roads, bridges, dams, harbours, canals, pipelines, airports, and much more.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://www.liverpool.ac.uk/engineering/departmentofcivilengineeringandindustrialdesign/divisionofcivilengineering/"><strong>Explore the more »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
   </p>
 </p>
 
